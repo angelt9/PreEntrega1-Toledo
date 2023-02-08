@@ -19,7 +19,7 @@ function NavBar() {
               <NavDropdown.Item href="#action/3.2">
                 Suplementos
               </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Instrumentos</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.3">Accesorios </NavDropdown.Item>
             </NavDropdown>
             <Nav.Link href="#link">Planes</Nav.Link>
             <Nav.Link href="#link">Nosotros</Nav.Link>
