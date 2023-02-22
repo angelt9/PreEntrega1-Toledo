@@ -1,5 +1,5 @@
 # Smart Training
-#### En esta página podes encontrar todo lo necesario para tu
+#### En esta página podes encontrar todo lo necesario para tu entrenamiento
 ---
 
 ### Demostración del proyecto de React con un gif
