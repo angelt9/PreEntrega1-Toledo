@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "product": "Proteina Whey",
+        "price": 10000,
+        "category": "supplements",
+        "quantity": 3,
+        "description": "WHEY PRO está constituido por proteínas de excelente calidad, las del suero lácteo, y vitaminas, en concentraciones que proporcionan un rendimiento físico óptimo."
+    },
+    {
+        "id": 2,
+        "product": "Creatina Whey",
+        "price": 20000,
+        "category": "supplements",
+        "quantity": 2,
+        "description": "La misión de ENA Sport es ayudar a los atletas a alcanzar sus objetivos, en todas las etapas de su vida deportiva. Desde hace más de 30 años ENA Sport fue creciendo hasta convertirse en una de las marcas líderes en el mercado argentino de suplementos e incluso exporta a otros países de Latinoamérica."
+    },
+    {
+        "id": 3,
+        "product": "Remera",
+        "price": 5000,
+        "category": "clothes",
+        "quantity": 5,
+        "description": "UNA CAMISETA DE ENTRENAMIENTO VERSÁTIL HECHA PARCIALMENTE CON MATERIALES RECICLADOS"
+    }
+]
