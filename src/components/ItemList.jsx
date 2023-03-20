@@ -1,25 +1,23 @@
 import React from "react";
-import Item from "../components/Item";
+import Item from "./Item";
 
-const ItemList = ({product}) => {
-    
-    return (
-        <div>
-            {
-                product.map((prod)=>{
-                    return(
-                            <div key={prod.id}> 
-                            <Item
-                                id={prod.id} 
-                                product={prod.product} 
-                                price={prod.price}  
-                                quantity={prod.quantity} />
-                            </div>
-                    )
-                })
-            }
-        </div>
-    )
-}
+const ItemList = ({ products }) => {
+  return (
+    <div>
+      {products.map((prod) => {
+        return (
+          <div key={prod.id}>
+            <Item
+              id={prod.id}
+              product={prod.product}
+              price={prod.price}
+              category={prod.category}
+            />
+          </div>
+        );
+      })}
+    </div>
+  );
+};
 
-export default ItemList
+export default React.memo(ItemList);

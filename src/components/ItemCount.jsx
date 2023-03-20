@@ -1,25 +1,57 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { CounterContext } from "../context/CartContext.jsx";
+import Swal from "sweetalert2";
 
-const ItemCount = ({ stock }) => {
-  let [Add, SetAdd] = useState(0);
+const ItemCount = ({ stock, id, price, product }) => {
+  const { setCart } = useContext(CounterContext);
+  let [add, setAdd] = useState(1);
 
-  const AddProd = () => {
-    if (Add < stock) {
-      SetAdd(Add + 1);
+  const addProd = () => {
+    if (add < stock) {
+      setAdd(add + 1);
     }
   };
 
-  const Subtract = () => {
-    if (Add > 0) {
-      SetAdd(Add - 1);
+  const subtract = () => {
+    if (add > 1) {
+      setAdd(add - 1);
     }
   };
+
+  const addCart = () => {
+    setCart((addItems) => {
+      const addedItem = addItems.find((items) => items.id === id);
+      Swal.fire({
+        position: "center",
+        title: "Agregado al carrito",
+        timer: 1000,
+      });
+
+      if (addedItem) {
+        return addItems.map((items) => {
+          if (items.id === id) {
+            return { ...items, quantity: items.quantity + add };
+          } else {
+            return items;
+          }
+        });
+      } else {
+        return [...addItems, { id, quantity: add, price, product }];
+      }
+    });
+  };
+
   return (
-    <div>
-      <button onClick={Subtract}>-</button>
-      <span>{Add} </span>
-      <button onClick={AddProd}>+</button>
-    </div>
+    <>
+      <div>
+        <button className="btn btn-dark" onClick={subtract}>-</button>
+        <span>{add} </span>
+        <button className="btn btn-dark" onClick={addProd}>+</button>
+      </div>
+      <div>
+        <button className="btn btn-dark" onClick={() => addCart()}>Agregar al carrito</button>
+      </div>
+    </>
   );
 };
 

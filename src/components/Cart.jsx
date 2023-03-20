@@ -1,30 +1,66 @@
-import React from "react";
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
+import React, {useContext} from "react";
+import { CounterContext } from "../context/CartContext.jsx";
+import SendOrder from "./SendOrder";
+import NoItemsLoad from "./EmptyCart";
 
-function Cart() {
-  return (
-    <Form>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Ingrese su email</Form.Label>
-        <Form.Control type="email" placeholder="Enter email" />
-        <Form.Text className="text-muted">
-          No compartiremos su email con nadie
-        </Form.Text>
-      </Form.Group>
+const Cart = () => {
+  const { cart, removeItem, removeAll, totalPurchase } =
+    useContext(CounterContext);
 
-      <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Label>Contraseña</Form.Label>
-        <Form.Control type="password" placeholder="Password" />
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicCheckbox">
-        <Form.Check type="checkbox" label="Check me out" />
-      </Form.Group>
-      <Button variant="primary" type="submit">
-        Enviar
-      </Button>
-    </Form>
+  function formatNumber(number) {
+    return new Intl.NumberFormat().format(number);
+  }
+
+  return !cart.length ? (
+    <NoItemsLoad />
+  ) : (
+    <>
+      <div>
+        <button className="btn btn-danger" onClick={removeAll}>
+          Limpiar carrito
+        </button>
+      </div>
+      <div>
+        {cart.map((item) => {
+          return (
+            <div key={item.id}>
+              <div>
+                <div>
+                  <h2>{item.product}</h2>
+                  <h5>
+                    Precio:
+                    <span> ${formatNumber(item.price)}</span>
+                  </h5>
+                  <p>
+                    Cantidad:
+                    <span> {item.quantity}</span>
+                  </p>
+                  <h6>
+                    Total parcial:
+                    <span> ${formatNumber(item.price * item.quantity)} </span>
+                  </h6>
+                </div>
+                <div>
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => removeItem(item.id)}
+                  >
+                    Eliminar
+                  </button>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      <div>
+        <h3>
+          Precio total: <span>${formatNumber(totalPurchase())}</span>
+        </h3>
+      </div>
+      {<SendOrder />}
+    </>
   );
-}
+};
 
 export default Cart;

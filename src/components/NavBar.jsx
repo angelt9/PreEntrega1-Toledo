@@ -1,16 +1,15 @@
 import React from "react";
-import CardWidget from "./CartWidget";
+import CardWidget from "./CardWidget";
 import { Link } from "react-router-dom";
 
 const NavBar = () => {
   return (
-    <>
+    <div>
       <nav className="navbar navbar-expand-lg">
         <div className="container-fluid">
           <Link to={"/"}>
-            <h1>SmartTraining</h1>
+            <h2>SmartTraining</h2>
           </Link>
-
           <button
             className="navbar-toggler"
             type="button"
@@ -23,7 +22,10 @@ const NavBar = () => {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul className="navbar-nav  me-auto mb-2 mb-lg-0">
+              <Link className="nav-link" to={"/catalogue"}>
+                Catálogo
+              </Link>
               <li className="nav-item dropdown">
                 <a
                   className="nav-link dropdown-toggle"
@@ -40,7 +42,7 @@ const NavBar = () => {
                       className="dropdown-item"
                       to={`/category/${"supplements"}`}
                     >
-                      Suplementos
+                      Suplemento
                     </Link>
                   </li>
                   <li>
@@ -53,17 +55,12 @@ const NavBar = () => {
                   </li>
                 </ul>
               </li>
-
-              <Link className="nav-link" to={"/catalogue"}>
-                Catalogo
-              </Link>
             </ul>
           </div>
-
           <CardWidget />
         </div>
       </nav>
-    </>
+    </div>
   );
 };
 

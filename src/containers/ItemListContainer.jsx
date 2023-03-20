@@ -1,19 +1,42 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ItemList from "../components/ItemList";
-import Data from "../data.json";
 import { useParams } from "react-router-dom";
+import {
+  collection,
+  getDocs,
+  getFirestore,
+  query,
+  where,
+} from "firebase/firestore";
+import Loading from "../components/Loading";
+import "../App.css";
 
 const ItemListContainer = ({ greeting }) => {
   const { categoryid } = useParams();
-  const itemFilter = Data.filter((product) => product.category === categoryid);
+  const [loading, setLoading] = useState(true);
+  const [prodList, setProdList] = useState([]);
+
+  useEffect(() => {
+    setLoading(true);
+
+    const db = getFirestore();
+    const itemsCollection = categoryid
+      ? query(collection(db, "products"), where("category", "==", categoryid))
+      : collection(db, "products");
+    getDocs(itemsCollection)
+      .then((snapshot) => {
+        setProdList(
+          snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
+        );
+      })
+      .catch((error) => console.log(error))
+      .finally(() => setLoading(false));
+  }, [categoryid]);
+
   return (
     <>
       <h1>{greeting}</h1>
-      {categoryid ? (
-        <ItemList product={itemFilter} />
-      ) : (
-        <ItemList product={Data} />
-      )}
+      {loading ? <Loading /> : <ItemList products={prodList} />}
     </>
   );
 };
